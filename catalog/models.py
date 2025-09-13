@@ -20,6 +20,12 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
 
+    def short_description(self):
+        """Возвращает сокращенное описание (первые 100 символов)"""
+        if len(self.description) > 100:
+            return self.description[:100] + '...'
+        return self.description
+
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
