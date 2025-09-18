@@ -1,21 +1,19 @@
-from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView, TemplateView
+from django.shortcuts import get_object_or_404
 from .models import Product
 
-def home(request):
-    """Контроллер для отображения домашней страницы"""
-    products = Product.objects.all()
-    context = {
-        'products': products,
-    }
-    return render(request, 'catalog/home.html', context)
+class HomeView(ListView):
+    """CBV для отображения домашней страницы"""
+    model = Product
+    template_name = 'catalog/home.html'
+    context_object_name = 'products'
 
-def contacts(request):
-    return render(request, 'catalog/contacts.html')
+class ProductDetailView(DetailView):
+    """CBV для отображения детальной информации о товаре"""
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
 
-
-def product_detail(request, pk):
-    """Контроллер для отображения детальной информации о товаре"""
-    product = get_object_or_404(Product, pk=pk)
-    context = {
-        'product': product,
-    }
+class ContactsView(TemplateView):
+    """CBV для отображения страницы контактов"""
+    template_name = 'catalog/contacts.html'
