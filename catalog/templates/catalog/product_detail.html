@@ -1,5 +1,7 @@
 {% extends 'catalog/base.html' %}
 
+{% block title %}{{ product.name }} - Каталог товаров{% endblock %}
+
 {% block content %}
 <div class="container mt-5">
     <div class="row">
@@ -7,11 +9,20 @@
             {% if product.image %}
             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded">
             {% else %}
-            <img src="https://via.placeholder.com/400x300" alt="Изображение отсутствует" class="img-fluid rounded">
+            <div class="text-center py-5 bg-light rounded">
+                <i class="bi bi-image" style="font-size: 3rem;"></i>
+                <p class="mt-2">Изображение отсутствует</p>
+            </div>
             {% endif %}
         </div>
         <div class="col-md-6">
-            <h1 class="display-4">{{ product.name }}</h1>
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <h1 class="display-4">{{ product.name }}</h1>
+                <div class="btn-group">
+                    <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-outline-secondary">Изменить</a>
+                    <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-outline-danger">Удалить</a>
+                </div>
+            </div>
             <p class="lead">Категория: {{ product.category.name }}</p>
             <p class="h3 text-primary">{{ product.price }} руб.</p>
             <hr>
@@ -22,7 +33,8 @@
                 <p><small class="text-muted">Обновлен: {{ product.updated_at|date:"d.m.Y H:i" }}</small></p>
             </div>
             <div class="mt-4">
-                <a href="{% url 'home' %}" class="btn btn-secondary">Вернуться на главную</a>
+                <a href="{% url 'catalog:home' %}" class="btn btn-secondary">Вернуться на главную</a>
+                <a href="{% url 'catalog:product_create' %}" class="btn btn-primary">Добавить новый продукт</a>
             </div>
         </div>
     </div>
