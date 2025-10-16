@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Отмена публикации продукта - Каталог товаров{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title mb-0">Отмена публикации</h2>
+                </div>
+                <div class="card-body">
+                    <p>Вы уверены, что хотите отменить публикацию продукта <strong>"{{ object.name }}"</strong>?</p>
+                    <p class="text-muted">Продукт будет перемещен в черновики и перестанет отображаться в общем каталоге.</p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'catalog:product_detail' object.pk %}" class="btn btn-secondary">
+                                Отмена
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                Отменить публикацию
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
