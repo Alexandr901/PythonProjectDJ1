@@ -1,6 +1,7 @@
-from django.core.management import BaseCommand
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.core.management import BaseCommand
+
 from catalog.models import Product
 
 
@@ -11,7 +12,7 @@ class Command(BaseCommand):
     Создает группу "Модератор продуктов" и назначает необходимые разрешения.
     """
 
-    help = 'Создает группы и назначает разрешения для модераторов'
+    help = "Создает группы и назначает разрешения для модераторов"
 
     def handle(self, *args, **options):
         """
@@ -23,7 +24,7 @@ class Command(BaseCommand):
         """
         # Создаем группу "Модератор продуктов"
         moderator_group, created = Group.objects.get_or_create(
-            name='Модератор продуктов'
+            name="Модератор продуктов"
         )
 
         if created:
@@ -40,35 +41,29 @@ class Command(BaseCommand):
 
         # Кастомное разрешение на отмену публикации
         unpublish_permission = Permission.objects.get(
-            codename='can_unpublish_product',
-            content_type=content_type
+            codename="can_unpublish_product", content_type=content_type
         )
 
         # Разрешение на удаление продукта
         delete_permission = Permission.objects.get(
-            codename='delete_product',
-            content_type=content_type
+            codename="delete_product", content_type=content_type
         )
 
         # Разрешение на изменение продукта
         change_permission = Permission.objects.get(
-            codename='change_product',
-            content_type=content_type
+            codename="change_product", content_type=content_type
         )
 
         # Назначаем разрешения группе
         moderator_group.permissions.add(
-            unpublish_permission,
-            delete_permission,
-            change_permission
+            unpublish_permission, delete_permission, change_permission
         )
 
         self.stdout.write(
             self.style.SUCCESS(
                 'Разрешения назначены группе "Модератор продуктов":\n'
-                '- Может отменять публикацию продукта\n'
-                '- Может удалять любой продукт\n'
-                '- Может изменять любой продукт'
+                "- Может отменять публикацию продукта\n"
+                "- Может удалять любой продукт\n"
+                "- Может изменять любой продукт"
             )
         )
-

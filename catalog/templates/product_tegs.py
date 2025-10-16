@@ -17,7 +17,7 @@ def can_edit_product(user, product):
     """
     if not user.is_authenticated:
         return False
-    return product.owner == user or user.has_perm('catalog.change_product')
+    return product.owner == user or user.has_perm("catalog.change_product")
 
 
 @register.filter
@@ -34,7 +34,7 @@ def can_delete_product(user, product):
     """
     if not user.is_authenticated:
         return False
-    return product.owner == user or user.has_perm('catalog.delete_product')
+    return product.owner == user or user.has_perm("catalog.delete_product")
 
 
 @register.filter
@@ -50,4 +50,4 @@ def can_unpublish_product(user):
     """
     if not user.is_authenticated:
         return False
-    return user.has_perm('catalog.can_unpublish_product')
+    return user.has_perm("catalog.can_unpublish_product")
