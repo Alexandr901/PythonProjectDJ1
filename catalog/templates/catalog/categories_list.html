@@ -1,0 +1,58 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">{{ title }}</h1>
+    
+    <div class="row">
+        {% for category, products in categories_products.items %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title h5 mb-0">
+                        <a href="{% url 'catalog:category_products' category.slug %}" class="text-white text-decoration-none">
+                            {{ category.name }}
+                        </a>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ category.description|truncatechars:150 }}</p>
+                    
+                    {% if products %}
+                    <h6 class="mt-3">Продукты в категории:</h6>
+                    <div class="list-group list-group-flush">
+                        {% for product in products %}
+                        <a href="{% url 'catalog:product_detail' product.pk %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">{{ product.name }}</h6>
+                                <small class="text-muted">{{ product.price }} руб.</small>
+                            </div>
+                            <p class="mb-1 small">{{ product.description|truncatechars:80 }}</p>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info mb-0">
+                        В этой категории пока нет продуктов.
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'catalog:category_products' category.slug %}" class="btn btn-primary btn-sm">
+                        Посмотреть все продукты
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                Категории пока не добавлены.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

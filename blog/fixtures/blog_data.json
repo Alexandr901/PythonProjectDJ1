@@ -1,0 +1,38 @@
+[
+{
+  "model": "blog.blogpost",
+  "pk": 1,
+  "fields": {
+    "title": "Первая запись в блоге",
+    "content": "Это содержимое первой записи в нашем блоге. Здесь может быть много интересного текста о нашем проекте и товарах.",
+    "preview": "",
+    "created_at": "2024-01-01T10:00:00Z",
+    "is_published": true,
+    "views_count": 5
+  }
+},
+{
+  "model": "blog.blogpost",
+  "pk": 2,
+  "fields": {
+    "title": "Вторая запись в блоге",
+    "content": "Это содержимое второй записи в нашем блоге. Мы рассказываем о новинках и акциях в нашем магазине.",
+    "preview": "",
+    "created_at": "2024-01-05T14:30:00Z",
+    "is_published": true,
+    "views_count": 10
+  }
+},
+{
+  "model": "blog.blogpost",
+  "pk": 3,
+  "fields": {
+    "title": "Черновик записи",
+    "content": "Это черновик записи, который еще не опубликован.",
+    "preview": "",
+    "created_at": "2024-01-10T09:15:00Z",
+    "is_published": false,
+    "views_count": 0
+  }
+}
+]
