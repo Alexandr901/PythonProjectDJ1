@@ -23,20 +23,16 @@
    python -m venv venv
    venv\Scripts\activate.bat
    ```
-3. Установите необходимые зависимости:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Примените миграции:
+3. Примените миграции:
 
     ````bash
    python manage.py migrate
     ````
-5. Запустите сервер разработки:
+4. Запустите сервер разработки:
     ````bash
    python manage.py runserver
    ````
-6. Откройте в браузере:
+5. Откройте в браузере:
 
 - Главная страница: http://127.0.0.1:8000/
 
